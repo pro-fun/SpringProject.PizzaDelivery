@@ -1,51 +1,50 @@
 package by.academypvt.repository.impl;
 
 import by.academypvt.connection.HibernateJavaConfig;
-import by.academypvt.domain.entity.User;
-import by.academypvt.repository.UserRepository;
+import by.academypvt.domain.entity.Order;
+import by.academypvt.repository.OrderRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Query;
 import java.util.List;
 
-public class UserRepositoryHibernate implements UserRepository {
+public class OrderRepositoryHibernate implements OrderRepository {
     private final SessionFactory sessionFactory;
-    public UserRepositoryHibernate() {
+    public OrderRepositoryHibernate() {
         this.sessionFactory = HibernateJavaConfig.getSessionFactory();
     }
-
     @Override
-    public User findUserById(Long id) {
+    public Order findOrderById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Order order = session.get(Order.class, id);
         session.close();
-        return user;
+        return order;
     }
 
     @Override
-    public void addUser(User user) {
+    public void addOrder(Order order) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(user);
+        session.persist(order);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteOrderById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Order order = session.get(Order.class, id);
         session.getTransaction().begin();
-        session.remove(user);
+        session.remove(order);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<User> updateUsers() {
+    public List<Order> updateOrders() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select u from User u");
-        return (List<User>) query.getResultList();
+        Query query = session.createQuery("select o from Order o");
+        return (List<Order>) query.getResultList();
     }
 }

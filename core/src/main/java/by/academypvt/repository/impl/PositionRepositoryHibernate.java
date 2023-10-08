@@ -1,51 +1,51 @@
 package by.academypvt.repository.impl;
 
 import by.academypvt.connection.HibernateJavaConfig;
-import by.academypvt.domain.entity.User;
-import by.academypvt.repository.UserRepository;
+import by.academypvt.domain.entity.Position;
+import by.academypvt.repository.PositionRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Query;
 import java.util.List;
 
-public class UserRepositoryHibernate implements UserRepository {
+public class PositionRepositoryHibernate implements PositionRepository {
     private final SessionFactory sessionFactory;
-    public UserRepositoryHibernate() {
+    public PositionRepositoryHibernate() {
         this.sessionFactory = HibernateJavaConfig.getSessionFactory();
     }
 
     @Override
-    public User findUserById(Long id) {
+    public Position findPositionById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Position position = session.get(Position.class, id);
         session.close();
-        return user;
+        return position;
     }
 
     @Override
-    public void addUser(User user) {
+    public void addPosition(Position position) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(user);
+        session.persist(position);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deletePositionById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Position position = session.get(Position.class, id);
         session.getTransaction().begin();
-        session.remove(user);
+        session.remove(position);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<User> updateUsers() {
+    public List<Position> updatePositions() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select u from User u");
-        return (List<User>) query.getResultList();
+        Query query = session.createQuery("select p from Position p");
+        return (List<Position>) query.getResultList();
     }
 }
