@@ -5,10 +5,11 @@ import by.academypvt.mapper.UserMapper;
 import by.academypvt.repository.UserRepository;
 import by.academypvt.service.AdminService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 @AllArgsConstructor
 public class AdminServiceJpa implements AdminService {
     private final UserRepository userRepository;
@@ -20,11 +21,11 @@ public class AdminServiceJpa implements AdminService {
 
     @Override
     public List<UserResponse> updateUsers() {
-        return userRepository.updateUsers().stream().map(userMapper::mapFromUser).collect(Collectors.toList());
+        return userRepository.updateUsers().stream().map(userMapper::toResponse).collect(Collectors.toList());
     }
 
     @Override
     public UserResponse findUserById(Long id) {
-        return userMapper.mapFromUser(userRepository.findUserById(id));
+        return userMapper.toResponse(userRepository.findUserById(id));
     }
 }

@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity(name = "user")
 @Table(schema = "delivery", name = "user")
@@ -27,6 +26,5 @@ public class User {
     private String password;
 
 
-    public User(String name, String surname, String login, String password, String address, String phoneNumber, String email) {
-    }
+
 }

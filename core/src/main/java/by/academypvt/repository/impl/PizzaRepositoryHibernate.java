@@ -5,10 +5,11 @@ import by.academypvt.domain.entity.Pizza;
 import by.academypvt.repository.PizzaRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
-
+@Repository
 public class PizzaRepositoryHibernate implements PizzaRepository {
     private final SessionFactory sessionFactory;
     public PizzaRepositoryHibernate() {

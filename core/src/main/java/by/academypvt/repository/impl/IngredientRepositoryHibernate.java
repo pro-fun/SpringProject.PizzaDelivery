@@ -5,9 +5,11 @@ import by.academypvt.domain.entity.Ingredient;
 import by.academypvt.repository.IngredientRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
+@Repository
 
 public class IngredientRepositoryHibernate implements IngredientRepository {
     private final SessionFactory sessionFactory;

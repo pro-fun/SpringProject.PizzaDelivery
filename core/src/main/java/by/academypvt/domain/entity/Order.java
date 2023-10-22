@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Entity(name = "order")
 @Table(schema = "delivery", name = "order")
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id")
@@ -26,6 +26,7 @@ public class Order {
     private String orderTime;
 
     private State state;
+    private String comment;
 
     private DeliveryType deliveryType;
     private Float cost;
@@ -37,7 +38,6 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     protected List<SauceOrder> sauces = new ArrayList<>();
-
 
 
     public Order(String orderTime, Float cost, State state, DeliveryType deliveryType) {

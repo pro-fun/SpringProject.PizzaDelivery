@@ -5,10 +5,11 @@ import by.academypvt.domain.entity.User;
 import by.academypvt.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
-
+@Repository
 public class UserRepositoryHibernate implements UserRepository {
     private final SessionFactory sessionFactory;
     public UserRepositoryHibernate() {

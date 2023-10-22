@@ -10,4 +10,5 @@ public interface OrderService {
     void addOrder(OrderRequest orderRequest);
     void deleteOrderById(Long id);
     List<OrderResponse> updateOrders();
+    void addPizzaToOrder(Long userId);
 }
