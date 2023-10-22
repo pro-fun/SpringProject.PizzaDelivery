@@ -1,8 +1,8 @@
 package by.academypvt.repository.impl;
 
 import by.academypvt.connection.HibernateJavaConfig;
-import by.academypvt.domain.entity.User;
-import by.academypvt.repository.UserRepository;
+import by.academypvt.domain.entity.Sauce;
+import by.academypvt.repository.SauceRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -10,43 +10,43 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Query;
 import java.util.List;
 @Repository
-public class UserRepositoryHibernate implements UserRepository {
+public class SauceRepositoryHibernate implements SauceRepository {
     private final SessionFactory sessionFactory;
-    public UserRepositoryHibernate() {
+    public SauceRepositoryHibernate() {
         this.sessionFactory = HibernateJavaConfig.getSessionFactory();
     }
 
     @Override
-    public User findUserById(Long id) {
+    public Sauce findSauceById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Sauce sauce = session.get(Sauce.class, id);
         session.close();
-        return user;
+        return sauce;
     }
 
     @Override
-    public void addUser(User user) {
+    public void addSauce(Sauce sauce) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(user);
+        session.persist(sauce);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteSauceById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Sauce sauce = session.get(Sauce.class, id);
         session.getTransaction().begin();
-        session.remove(user);
+        session.remove(sauce);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<User> updateUsers() {
+    public List<Sauce> updateSauces() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select u from User u");
-        return (List<User>) query.getResultList();
+        Query query = session.createQuery("select s from Sauce s");
+        return (List<Sauce>) query.getResultList();
     }
 }
