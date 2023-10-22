@@ -5,6 +5,7 @@ import by.academypvt.dto.order.State;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,11 +29,15 @@ public class Order {
 
     private DeliveryType deliveryType;
     private Float cost;
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "order")
     @ToString.Exclude
-    private List<Position> positions;
+    @EqualsAndHashCode.Exclude
+    private List<PizzaOrder> pizzas = new ArrayList<>();
+    @OneToMany(mappedBy = "order")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    protected List<SauceOrder> sauces = new ArrayList<>();
+
 
 
     public Order(String orderTime, Float cost, State state, DeliveryType deliveryType) {

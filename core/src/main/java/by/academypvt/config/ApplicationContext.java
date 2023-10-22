@@ -11,17 +11,13 @@ public class ApplicationContext {
     private static ApplicationContext applicationContext;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    private final PositionRepository positionRepository;
     private final PizzaRepository pizzaRepository;
     private final SauceRepository sauceRepository;
     private final IngredientRepository ingredientRepository;
     private final UserService userService;
     private final AdminService adminService;
-    private final PositionService positionService;
-    private final PizzaService pizzaService;
-    private final SauceService sauceService;
     private final OrderService orderService;
-    private final IngredientService ingredientService;
+
     private final UserMapper userMapper;
     private final OrderMapper orderMapper;
 
@@ -29,7 +25,6 @@ public class ApplicationContext {
     private ApplicationContext() {
         userRepository = new UserRepositoryHibernate();
         orderRepository=new OrderRepositoryHibernate();
-        positionRepository=new PositionRepositoryHibernate();
         pizzaRepository=new PizzaRepositoryHibernate();
         sauceRepository=new SauceRepositoryHibernate();
         ingredientRepository=new IngredientRepositoryHibernate();
@@ -38,10 +33,6 @@ public class ApplicationContext {
         userService = new UserServiceJpa(userRepository,userMapper);
         adminService = new AdminServiceJpa(userRepository,userMapper);
         orderService = new OrderServiceJpa(orderRepository,orderMapper);
-        positionService = new PositionServiceJpa(positionRepository);
-        pizzaService = new PizzaServiceJpa(pizzaRepository);
-        sauceService = new SauceServiceJpa(sauceRepository);
-        ingredientService = new IngredientServiceJpa(ingredientRepository);
     }
 
     public static ApplicationContext getInstance() {
@@ -71,9 +62,6 @@ public class ApplicationContext {
         return orderRepository;
     }
 
-    public PositionRepository getPositionRepository() {
-        return positionRepository;
-    }
 
     public PizzaRepository getPizzaRepository() {
         return pizzaRepository;
@@ -87,25 +75,11 @@ public class ApplicationContext {
         return ingredientRepository;
     }
 
-    public PositionService getPositionService() {
-        return positionService;
-    }
-
-    public PizzaService getPizzaService() {
-        return pizzaService;
-    }
-
-    public SauceService getSauceService() {
-        return sauceService;
-    }
 
     public OrderService getOrderService() {
         return orderService;
     }
 
-    public IngredientService getIngredientService() {
-        return ingredientService;
-    }
 
     public OrderMapper getOrderMapper() {
         return orderMapper;

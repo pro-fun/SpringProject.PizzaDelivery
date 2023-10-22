@@ -4,14 +4,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity(name = "sauce")
 @Table(schema = "delivery", name = "sauce")
+//@Cacheable
+//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sauce")
 public class Sauce {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sauce_id")
@@ -19,11 +23,7 @@ public class Sauce {
     private Long id;
     private String name;
     private Float cost;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JoinTable(schema = "delivery", name = "sauce_for_positions",
-            joinColumns = {@JoinColumn(name = "sauce_id")},
-            inverseJoinColumns = {@JoinColumn(name = "position_id")})
-    private List<Position> positions;
+    @OneToMany(mappedBy = "sauce")
+    protected List<SauceOrder> sauces = new ArrayList<>();
+
 }
