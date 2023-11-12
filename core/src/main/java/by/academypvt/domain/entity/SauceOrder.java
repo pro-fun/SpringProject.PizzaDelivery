@@ -1,12 +1,13 @@
 package by.academypvt.domain.entity;
 
-import com.sun.istack.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 
 @Data
@@ -25,6 +26,7 @@ public class SauceOrder {
         @Column(name = "sauce_id")
         protected Long sauceId;
     }
+
     @EmbeddedId
     protected Id id = new Id();
     @ManyToOne
@@ -39,7 +41,8 @@ public class SauceOrder {
     @Column(updatable = false)
     @NotNull
     private Float cost;
-    public SauceOrder(Order order,Sauce sauce, Long count){
+
+    public SauceOrder(Order order, Sauce sauce, Long count) {
         this.order = order;
         this.sauce = sauce;
         this.count = count;

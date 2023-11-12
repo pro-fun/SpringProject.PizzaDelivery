@@ -1,13 +1,13 @@
-package by.academypvt.config;
+//package by.academypvt.config;
 
-import by.academypvt.mapper.OrderMapper;
-import by.academypvt.mapper.UserMapper;
-import by.academypvt.repository.*;
-import by.academypvt.repository.impl.*;
-import by.academypvt.service.*;
-import by.academypvt.service.impl.*;
+//import by.academypvt.mapper.OrderMapper;
+//import by.academypvt.mapper.UserMapper;
+//import by.academypvt.repository.*;
+//
+//import by.academypvt.service.*;
+//import by.academypvt.service.impl.*;
 
-public class ApplicationContext {
+//public class ApplicationContext {
 //    private static ApplicationContext applicationContext;
 //    private final UserRepository userRepository;
 //    private final OrderRepository orderRepository;
@@ -84,4 +84,4 @@ public class ApplicationContext {
 //    public OrderMapper getOrderMapper() {
 //        return orderMapper;
 //    }
-}
+//}

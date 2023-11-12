@@ -2,7 +2,7 @@ package by.academypvt.domain.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -10,8 +10,7 @@ import java.time.LocalDate;
 @Table(schema = "delivery", name = "comment")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_id")
-    @SequenceGenerator(name = "comment_id", sequenceName = "comment_seq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String comment;
     private LocalDate date;

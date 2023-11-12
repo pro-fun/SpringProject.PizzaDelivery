@@ -1,12 +1,13 @@
 package by.academypvt.domain.entity;
 
-import com.sun.istack.NotNull;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -19,12 +20,13 @@ public class PizzaOrder {
     @EqualsAndHashCode
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Id implements Serializable{
+    public static class Id implements Serializable {
         @Column(name = "order_id")
         protected Long orderId;
         @Column(name = "pizza_id")
         protected Long pizzaId;
     }
+
     @EmbeddedId
     protected Id id = new Id();
     @ManyToOne
@@ -39,7 +41,8 @@ public class PizzaOrder {
     @Column(updatable = false)
     @NotNull
     private Float cost;
-    public PizzaOrder(Order order,Pizza pizza, Long count){
+
+    public PizzaOrder(Order order, Pizza pizza, Long count) {
         this.order = order;
         this.pizza = pizza;
         this.count = count;
@@ -50,9 +53,6 @@ public class PizzaOrder {
         order.getPizzas().add(this);
         pizza.getPizzas().add(this);
     }
-
-
-
 
 
 }

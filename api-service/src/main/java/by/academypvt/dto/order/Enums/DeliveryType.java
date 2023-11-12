@@ -1,4 +1,4 @@
-package by.academypvt.dto.order;
+package by.academypvt.dto.order.Enums;
 
 public enum DeliveryType {
     DELIVERY,

@@ -1,15 +1,16 @@
 package by.academypvt.domain.entity;
 
-import by.academypvt.dto.order.DeliveryType;
-import by.academypvt.dto.order.State;
+import by.academypvt.dto.order.Enums.DeliveryType;
+import by.academypvt.dto.order.Enums.State;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity(name = "order")
+@Setter
+@Entity
 @Table(schema = "delivery", name = "order")
 @NoArgsConstructor
 public class Order {
@@ -18,9 +19,9 @@ public class Order {
     @SequenceGenerator(name = "order_id", sequenceName = "order_seq", allocationSize = 50)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userId;
 
     @Column(name = "order_time")
     private String orderTime;
@@ -37,9 +38,7 @@ public class Order {
     @OneToMany(mappedBy = "order")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected List<SauceOrder> sauces = new ArrayList<>();
+    private List<SauceOrder> sauces = new ArrayList<>();
 
 
-    public Order(String orderTime, Float cost, State state, DeliveryType deliveryType) {
-    }
 }
