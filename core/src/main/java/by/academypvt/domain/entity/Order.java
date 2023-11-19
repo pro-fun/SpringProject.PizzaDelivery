@@ -2,13 +2,11 @@ package by.academypvt.domain.entity;
 
 import by.academypvt.dto.enums.DeliveryType;
 import by.academypvt.dto.enums.State;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.*;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

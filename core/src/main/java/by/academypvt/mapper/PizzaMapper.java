@@ -4,10 +4,8 @@ import by.academypvt.domain.entity.Pizza;
 import by.academypvt.dto.pizza.PizzaRequest;
 import by.academypvt.dto.pizza.PizzaResponse;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component

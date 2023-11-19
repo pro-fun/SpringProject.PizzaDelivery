@@ -19,10 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminApi {
-    private final OrderRepository orderRepository;
-    private final PizzaRepository pizzaRepository;
     private final UserRepository userRepository;
-    private final OrderMapper orderMapper;
     private final UserMapper userMapper;
 
     @Override

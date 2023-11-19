@@ -3,15 +3,12 @@ package by.academypvt.controller;
 import by.academypvt.contract.restApi.OrderRestApi;
 import by.academypvt.contract.serviceApi.OrderApi;
 import by.academypvt.dto.comment.CommentRequest;
-import by.academypvt.dto.ingredient.IngredientRequest;
 import by.academypvt.dto.order.OrderDeliveryRequest;
 import by.academypvt.dto.order.PizzaOrderRequest;
 import by.academypvt.dto.order.OrderResponse;
 import by.academypvt.dto.order.SauceOrderRequest;
 import by.academypvt.dto.pizza.IngredientPizzaRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -46,5 +43,20 @@ public class OrderController implements OrderRestApi {
     @Override
     public OrderResponse toChangeOrderDelivery(OrderDeliveryRequest orderDeliveryRequest) {
         return orderService.toChangeOrderDelivery(orderDeliveryRequest);
+    }
+
+    @Override
+    public OrderResponse deletePizzaFromOrder(PizzaOrderRequest pizzaOrderRequest) {
+        return orderService.deletePizzaFromOrder(pizzaOrderRequest);
+    }
+
+    @Override
+    public OrderResponse deleteSauceFromOrder(SauceOrderRequest sauceOrderRequest) {
+        return orderService.deleteSauceFromOrder(sauceOrderRequest);
+    }
+
+    @Override
+    public OrderResponse deleteIngredientFromPizza(IngredientPizzaRequest ingredientPizzaRequest) {
+        return orderService.deleteIngredientFromPizza(ingredientPizzaRequest);
     }
 }

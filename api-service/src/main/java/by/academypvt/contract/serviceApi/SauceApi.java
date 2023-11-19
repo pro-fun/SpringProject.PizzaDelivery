@@ -2,7 +2,6 @@ package by.academypvt.contract.serviceApi;
 
 import by.academypvt.dto.sauce.SauceRequest;
 import by.academypvt.dto.sauce.SauceResponse;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

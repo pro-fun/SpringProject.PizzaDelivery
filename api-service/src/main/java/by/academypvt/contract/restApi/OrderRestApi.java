@@ -8,10 +8,7 @@ import by.academypvt.dto.order.OrderResponse;
 import by.academypvt.dto.order.SauceOrderRequest;
 import by.academypvt.dto.pizza.IngredientPizzaRequest;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("order")
 public interface OrderRestApi {
@@ -27,4 +24,11 @@ public interface OrderRestApi {
     OrderResponse addCommentToOrder(@RequestBody CommentRequest commentRequest);
     @PostMapping("/toChangeOrderDelivery")
     OrderResponse toChangeOrderDelivery(@RequestBody OrderDeliveryRequest orderDeliveryRequest);
+    @DeleteMapping("/deletePizzaFromOrder")
+    OrderResponse deletePizzaFromOrder(@RequestBody PizzaOrderRequest pizzaOrderRequest);
+    @DeleteMapping("/deleteSauceFromOrder")
+    OrderResponse deleteSauceFromOrder(@RequestBody SauceOrderRequest sauceOrderRequest);
+    @DeleteMapping("/deleteIngredientFromPizza")
+    OrderResponse deleteIngredientFromPizza(@RequestBody IngredientPizzaRequest ingredientPizzaRequest);
+
 }

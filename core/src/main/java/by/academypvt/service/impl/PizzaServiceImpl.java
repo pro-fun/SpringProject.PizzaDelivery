@@ -4,6 +4,7 @@ import by.academypvt.contract.serviceApi.PizzaApi;
 import by.academypvt.domain.entity.Pizza;
 import by.academypvt.dto.pizza.PizzaRequest;
 import by.academypvt.dto.pizza.PizzaResponse;
+import by.academypvt.dto.pizza.PizzaSizeRequest;
 import by.academypvt.errors.FoodEntityException;
 import by.academypvt.mapper.PizzaMapper;
 import by.academypvt.repository.spring.PizzaRepository;
@@ -40,6 +41,16 @@ public class PizzaServiceImpl implements PizzaApi {
     @Override
     public void deletePizza(Long id) {
         pizzaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PizzaResponse> getPizzasBySize(PizzaSizeRequest pizzaSizeRequest) {
+        List<Pizza> pizzas = pizzaRepository.findAll();
+        List<Pizza> filteredPizzas = pizzas.stream().filter(pizza -> pizza.getSize().equals(pizzaSizeRequest.getSize())).toList();
+        if(filteredPizzas.isEmpty()){
+            throw new FoodEntityException("Пицц с таким размером нет в базе данных");
+        }
+        return filteredPizzas.stream().map(pizzaMapper::toResponse).collect(Collectors.toList());
     }
 }
 

@@ -2,7 +2,6 @@ package by.academypvt.controller;
 
 import by.academypvt.contract.restApi.UserRestApi;
 import by.academypvt.contract.serviceApi.OrderApi;
-import by.academypvt.contract.serviceApi.UserApi;
 import by.academypvt.dto.order.OrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

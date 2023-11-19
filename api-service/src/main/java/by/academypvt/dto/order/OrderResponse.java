@@ -2,7 +2,6 @@ package by.academypvt.dto.order;
 
 import by.academypvt.dto.enums.DeliveryType;
 import by.academypvt.dto.enums.State;
-import by.academypvt.dto.pizza.IngredientPizzaResponse;
 import by.academypvt.dto.user.UserResponse;
 import lombok.Data;
 

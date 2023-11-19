@@ -1,8 +1,6 @@
 package by.academypvt.mapper;
 
 import by.academypvt.domain.entity.IngredientPizza;
-import by.academypvt.domain.entity.SauceOrder;
-import by.academypvt.dto.order.SauceOrderResponse;
 import by.academypvt.dto.pizza.IngredientPizzaResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

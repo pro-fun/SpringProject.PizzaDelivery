@@ -1,6 +1,5 @@
 package by.academypvt.config;
 
-import org.springframework.boot.web.server.Cookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,8 +27,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/user/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/order/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/order/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/order/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/registration/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/pizza/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/pizza/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/pizza/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/pizza/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/sauce/**").permitAll()

@@ -1,7 +1,5 @@
 package by.academypvt.contract.restApi;
 
-import by.academypvt.dto.pizza.PizzaRequest;
-import by.academypvt.dto.pizza.PizzaResponse;
 import by.academypvt.dto.sauce.SauceRequest;
 import by.academypvt.dto.sauce.SauceResponse;
 import org.springframework.validation.annotation.Validated;

@@ -1,10 +1,8 @@
 package by.academypvt.mapper;
 
 import by.academypvt.domain.entity.Order;
-import by.academypvt.dto.order.OrderRequest;
 import by.academypvt.dto.order.OrderResponse;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

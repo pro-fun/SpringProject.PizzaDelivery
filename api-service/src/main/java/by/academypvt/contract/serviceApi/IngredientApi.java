@@ -2,7 +2,6 @@ package by.academypvt.contract.serviceApi;
 
 import by.academypvt.dto.ingredient.IngredientRequest;
 import by.academypvt.dto.ingredient.IngredientResponse;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

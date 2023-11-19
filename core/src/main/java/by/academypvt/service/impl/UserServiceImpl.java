@@ -35,10 +35,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserApi {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    private final PizzaRepository pizzaRepository;
     private final UserMapper userMapper;
-    private final OrderMapper orderMapper;
-    private final PizzaMapper pizzaMapper;
     private final PasswordEncoder passwordEncoder;
     private final HttpServletRequest servletRequest;
 

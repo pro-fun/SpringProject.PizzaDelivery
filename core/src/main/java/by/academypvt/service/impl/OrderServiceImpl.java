@@ -6,7 +6,6 @@ import by.academypvt.domain.entity.*;
 import by.academypvt.dto.comment.CommentRequest;
 import by.academypvt.dto.enums.DeliveryType;
 import by.academypvt.dto.enums.State;
-import by.academypvt.dto.ingredient.IngredientRequest;
 import by.academypvt.dto.order.OrderDeliveryRequest;
 import by.academypvt.dto.order.PizzaOrderRequest;
 import by.academypvt.dto.order.OrderResponse;
@@ -154,6 +153,7 @@ public class OrderServiceImpl implements OrderApi {
         return orderMapper.toResponse(orderRepository.save(order.get()));
     }
 
+    @Transactional
     @Override
     public OrderResponse toChangeOrderDelivery(OrderDeliveryRequest orderDeliveryRequest) {
         Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
@@ -162,6 +162,85 @@ public class OrderServiceImpl implements OrderApi {
         }
         Optional<Order> order = orderRepository.findById(orderId);
         order.get().setDeliveryType(orderDeliveryRequest.getDeliveryType());
+        return orderMapper.toResponse(orderRepository.save(order.get()));
+    }
+
+    @Transactional
+    @Override
+    public OrderResponse deletePizzaFromOrder(PizzaOrderRequest pizzaOrderRequest) {
+        Pizza pizza = pizzaRepository.findByNameAndSize(pizzaOrderRequest.getName(), pizzaOrderRequest.getSize());
+        Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId == null) {
+            throw new AccountException("Пройдите авторизацию");
+        }
+        Optional<Order> order = orderRepository.findById(orderId);
+        if (pizza == null) {
+            throw new FoodEntityException("Данной пиццы нет в базе данных");
+        }
+        PizzaOrder pizzaOrder = pizzaOrderRepository.findByPizzaAndOrder(pizza, order.get());
+        if (pizzaOrder.getCount() < pizzaOrderRequest.getCount()) {
+            throw new FoodEntityException("В вашем заказе нет такого количества указанных пицц");
+        }
+        BigDecimal orderCost = order.get().getCost().subtract(pizzaOrder.getCost());
+        order.get().setCost(orderCost);
+        Long count = pizzaOrder.getCount() - pizzaOrderRequest.getCount();
+        if (count == 0) {
+            pizzaOrderRepository.delete(pizzaOrder);
+            order.get().getPizzas().remove(pizzaOrder);
+        }
+        return orderMapper.toResponse(orderRepository.save(order.get()));
+    }
+
+    @Transactional
+    @Override
+    public OrderResponse deleteSauceFromOrder(SauceOrderRequest sauceOrderRequest) {
+        Sauce sauce = sauceRepository.findByName(sauceOrderRequest.getName());
+        Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId == null) {
+            throw new AccountException("Пройдите авторизацию");
+        }
+        Optional<Order> order = orderRepository.findById(orderId);
+        if (sauce == null) {
+            throw new FoodEntityException("Данной пиццы нет в базе данных");
+        }
+        SauceOrder sauceOrder = sauceOrderRepository.findBySauceAndOrder(sauce, order.get());
+        if (sauceOrder.getCount() < sauceOrderRequest.getCount()) {
+            throw new FoodEntityException("В вашем заказе нет такого количества указанных пицц");
+        }
+        BigDecimal orderCost = order.get().getCost().subtract(sauceOrder.getCost());
+        order.get().setCost(orderCost);
+        Long count = sauceOrder.getCount() - sauceOrderRequest.getCount();
+        if (count == 0) {
+            sauceOrderRepository.delete(sauceOrder);
+            order.get().getPizzas().remove(sauceOrder);
+        }
+        return orderMapper.toResponse(orderRepository.save(order.get()));
+    }
+
+    @Transactional
+    @Override
+    public OrderResponse deleteIngredientFromPizza(IngredientPizzaRequest ingredientPizzaRequest) {
+        Pizza pizza = pizzaRepository.findByNameAndSize(ingredientPizzaRequest.getName(), ingredientPizzaRequest.getSize());
+        Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId == null) {
+            throw new AccountException("Пройдите авторизацию");
+        }
+        Optional<Order> order = orderRepository.findById(orderId);
+        Ingredient ingredient = ingredientRepository.findByName(ingredientPizzaRequest.getIngredient_name());
+        if (pizza == null || ingredient == null) {
+            throw new FoodEntityException("Данных продуктов нет в базе данных");
+        }
+        IngredientPizza ingredientPizza = ingredientPizzaRepository.findByIngredientAndPizzaAndOrder(ingredient, pizza, order.get());
+        if (ingredientPizza.getCount() < ingredientPizza.getCount()) {
+            throw new FoodEntityException("В вашем заказе нет такого количества указанных ингредиентов");
+        }
+        BigDecimal orderCost = order.get().getCost().subtract(ingredientPizza.getCost());
+        order.get().setCost(orderCost);
+        Long count = ingredientPizza.getCount() - ingredientPizzaRequest.getCount();
+        if (count == 0) {
+            ingredientPizzaRepository.delete(ingredientPizza);
+            order.get().getPizzas().remove(ingredientPizza);
+        }
         return orderMapper.toResponse(orderRepository.save(order.get()));
     }
 }
