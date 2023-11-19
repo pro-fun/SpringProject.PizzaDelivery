@@ -1,7 +1,6 @@
 package by.academypvt.contract.restApi;
 
 import by.academypvt.dto.comment.CommentRequest;
-import by.academypvt.dto.ingredient.IngredientRequest;
 import by.academypvt.dto.order.OrderDeliveryRequest;
 import by.academypvt.dto.order.PizzaOrderRequest;
 import by.academypvt.dto.order.OrderResponse;
