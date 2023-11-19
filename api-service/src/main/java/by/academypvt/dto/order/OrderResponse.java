@@ -1,16 +1,23 @@
 package by.academypvt.dto.order;
 
-import by.academypvt.dto.order.Enums.DeliveryType;
-import by.academypvt.dto.order.Enums.State;
-import lombok.AllArgsConstructor;
+import by.academypvt.dto.enums.DeliveryType;
+import by.academypvt.dto.enums.State;
+import by.academypvt.dto.user.UserResponse;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class OrderResponse {
     private Long id;
-    private String orderTime;
+    private UserResponse userId;
     private State state;
     private DeliveryType deliveryType;
-    private Float cost;
+    private BigDecimal cost;
+    private String comment;
+    private List<PizzaOrderResponse> pizzas = new ArrayList<>();
+    private List<SauceOrderResponse> sauces = new ArrayList<>();
 }

@@ -1,10 +1,12 @@
 package by.academypvt.domain.entity;
 
-import by.academypvt.dto.order.Enums.DeliveryType;
-import by.academypvt.dto.order.Enums.State;
+import by.academypvt.dto.enums.DeliveryType;
+import by.academypvt.dto.enums.State;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +30,9 @@ public class Order {
 
     private State state;
     private String comment;
-
+    @Column(name = "delivery_type")
     private DeliveryType deliveryType;
-    private Float cost;
+    private BigDecimal cost;
     @OneToMany(mappedBy = "order")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -39,6 +41,8 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<SauceOrder> sauces = new ArrayList<>();
-
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    protected List<IngredientPizza> ingredients = new ArrayList<>();
 
 }

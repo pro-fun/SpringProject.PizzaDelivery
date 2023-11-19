@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -40,7 +41,7 @@ public class SauceOrder {
     private Long count;
     @Column(updatable = false)
     @NotNull
-    private Float cost;
+    private BigDecimal cost;
 
     public SauceOrder(Order order, Sauce sauce, Long count) {
         this.order = order;

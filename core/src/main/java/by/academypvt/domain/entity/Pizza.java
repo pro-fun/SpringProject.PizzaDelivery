@@ -1,11 +1,14 @@
 package by.academypvt.domain.entity;
 
-import by.academypvt.dto.order.Enums.Size;
+import by.academypvt.dto.enums.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +20,17 @@ import java.util.List;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "pizza")
 public class Pizza {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pizza_id")
+    @SequenceGenerator(name = "pizza_id", sequenceName = "pizza_seq", allocationSize = 50)
     private Long id;
     private String name;
     private Size size;
-    private Float cost;
-    @OneToMany(mappedBy = "pizza")
+    private BigDecimal cost;
+    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
+    @ToString.Exclude
     protected List<PizzaOrder> pizzas = new ArrayList<>();
-    @OneToMany(mappedBy = "pizza")
+    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
+    @ToString.Exclude
     protected List<IngredientPizza> ingredients = new ArrayList<>();
 
 

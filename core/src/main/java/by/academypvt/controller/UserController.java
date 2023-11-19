@@ -1,22 +1,15 @@
 package by.academypvt.controller;
 
-import by.academypvt.contract.UserApi;
-import by.academypvt.dto.pizza.PizzaResponse;
+import by.academypvt.contract.restApi.UserRestApi;
+import by.academypvt.contract.serviceApi.UserApi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("user")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserRestApi {
     private final UserApi userService;
-    @GetMapping("/getPizzas")
-    public List<PizzaResponse> allPizzas(){
-        return userService.allPizzas();
-    }
+
+
 
 }

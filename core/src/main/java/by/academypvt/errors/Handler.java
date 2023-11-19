@@ -19,4 +19,28 @@ public class Handler {
         log.error("Exception", e);
         return errorResponse;
     }
+    @ResponseBody
+    @ExceptionHandler(value = AccountException.class)
+    public ErrorResponse notFound(AccountException e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(e.getMessage());
+        errorResponse.setStatus(400);
+        return errorResponse;
+    }
+    @ResponseBody
+    @ExceptionHandler(value = FoodEntityException.class)
+    public ErrorResponse notFoundPizza(FoodEntityException e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(e.getMessage());
+        errorResponse.setStatus(400);
+        return errorResponse;
+    }    @ResponseBody
+    @ExceptionHandler(value = OrderException.class)
+    public ErrorResponse notFoundOrder(OrderException e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(e.getMessage());
+        errorResponse.setStatus(400);
+        return errorResponse;
+    }
+
 }

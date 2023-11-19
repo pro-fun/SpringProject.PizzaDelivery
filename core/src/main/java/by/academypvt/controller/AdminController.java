@@ -1,11 +1,8 @@
 package by.academypvt.controller;
 
-import by.academypvt.contract.AdminApi;
-import by.academypvt.dto.order.OrderResponse;
-import by.academypvt.dto.order.OrderSauceRequest;
+import by.academypvt.contract.serviceApi.AdminApi;
 import by.academypvt.dto.user.UserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

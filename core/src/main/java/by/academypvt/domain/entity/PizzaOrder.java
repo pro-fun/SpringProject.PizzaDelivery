@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -40,7 +41,7 @@ public class PizzaOrder {
     private Long count;
     @Column(updatable = false)
     @NotNull
-    private Float cost;
+    private BigDecimal cost;
 
     public PizzaOrder(Order order, Pizza pizza, Long count) {
         this.order = order;

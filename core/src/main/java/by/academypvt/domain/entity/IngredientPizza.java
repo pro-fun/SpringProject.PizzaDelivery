@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +26,8 @@ public class IngredientPizza {
         protected Long ingredientId;
         @Column(name = "pizza_id")
         protected Long pizzaId;
+        @Column(name = "order_id")
+        protected Long orderId;
     }
 
     @EmbeddedId
@@ -35,23 +38,29 @@ public class IngredientPizza {
     @ManyToOne
     @JoinColumn(name = "pizza_id", insertable = false, updatable = false)
     private Pizza pizza;
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
     @Column(updatable = false)
     @NotNull
     private Long count;
     @Column(updatable = false)
     @NotNull
-    private Float cost;
+    private BigDecimal cost;
 
-    public IngredientPizza(Ingredient ingredient, Pizza pizza, Long count) {
+    public IngredientPizza(Ingredient ingredient, Pizza pizza, Order order, Long count) {
         this.ingredient = ingredient;
         this.pizza = pizza;
+        this.order = order;
         this.count = count;
 
         this.id.ingredientId = ingredient.getId();
         this.id.pizzaId = pizza.getId();
+        this.id.orderId = order.getId();
 
         ingredient.getIngredients().add(this);
         pizza.getIngredients().add(this);
+        order.getIngredients().add(this);
     }
 
 }
