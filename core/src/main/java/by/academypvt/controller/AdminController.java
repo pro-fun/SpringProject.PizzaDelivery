@@ -1,5 +1,6 @@
 package by.academypvt.controller;
 
+import by.academypvt.contract.restApi.AdminRestApi;
 import by.academypvt.contract.serviceApi.AdminApi;
 import by.academypvt.dto.user.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,18 +11,20 @@ import java.util.List;
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
-public class AdminController {
+public class AdminController implements AdminRestApi {
     private final AdminApi adminService;
-    @GetMapping("/allUsers")
-    public List<UserResponse> allUsers(){
+
+    @Override
+    public List<UserResponse> allUsers() {
         return adminService.allUsers();
     }
 
     @GetMapping("/{id}")
-    public UserResponse getUserById(@PathVariable("id") Long id){
+    public UserResponse getUserById(@PathVariable("id") Long id) {
         return (UserResponse) adminService.allUsers();
     }
-    @PostMapping("/delete/user")
+
+    @Override
     public void deleteUser(Long id) {
         adminService.deleteUser(id);
     }

@@ -68,7 +68,8 @@ public class UserServiceImpl implements UserApi {
     public UserResponse login(UserLoginRequest userLoginRequest) throws ServletException {
         servletRequest.login(userLoginRequest.getLogin(), userLoginRequest.getPassword());
         User user = userRepository.findByLogin(userLoginRequest.getLogin());
-
+        Long userId = user.getId();
+        servletRequest.getSession().setAttribute("userId", userId);
         List<Order> orders = orderRepository.findByUserId(user);
         Optional<Order> order = orders.stream().filter(order1 -> order1.getState().equals(State.FORMING)).findFirst();
         if (order.isEmpty()){

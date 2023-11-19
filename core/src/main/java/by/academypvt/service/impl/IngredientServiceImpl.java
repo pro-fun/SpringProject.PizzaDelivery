@@ -9,6 +9,7 @@ import by.academypvt.mapper.IngredientMapper;
 import by.academypvt.repository.spring.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 public class IngredientServiceImpl implements IngredientApi{
     private final IngredientMapper ingredientMapper;
     private final IngredientRepository ingredientRepository;
-
+    @Transactional
     @Override
     public IngredientResponse addIngredient(IngredientRequest ingredientRequest) {
             if (ingredientRepository.findByName(ingredientRequest.getName()) != null) {
@@ -31,5 +32,10 @@ public class IngredientServiceImpl implements IngredientApi{
     @Override
     public List<IngredientResponse> allIngredients() {
         return ingredientRepository.findAll().stream().map(ingredientMapper::toResponse).collect(Collectors.toList());
+    }
+    @Transactional
+    @Override
+    public void deleteIngredient(Long id) {
+        ingredientRepository.deleteById(id);
     }
 }

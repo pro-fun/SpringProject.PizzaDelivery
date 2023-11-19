@@ -16,6 +16,7 @@ public class OrderResponse {
     private Long id;
     private UserResponse userId;
     private State state;
+    private String orderTime;
     private DeliveryType deliveryType;
     private BigDecimal cost;
     private String comment;

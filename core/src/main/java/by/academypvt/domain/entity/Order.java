@@ -2,9 +2,13 @@ package by.academypvt.domain.entity;
 
 import by.academypvt.dto.enums.DeliveryType;
 import by.academypvt.dto.enums.State;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,8 +25,8 @@ public class Order {
     @SequenceGenerator(name = "order_id", sequenceName = "order_seq", allocationSize = 50)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
 
     @Column(name = "order_time")
@@ -43,6 +47,6 @@ public class Order {
     private List<SauceOrder> sauces = new ArrayList<>();
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order")
     protected List<IngredientPizza> ingredients = new ArrayList<>();
 }

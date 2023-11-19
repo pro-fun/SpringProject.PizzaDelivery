@@ -33,15 +33,6 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "role", nullable = false)
     private String role;
-    @OneToMany
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Order> orders;
-    @OneToMany
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "comment")
-    private List<Comment> comments;
 
 
     @Override

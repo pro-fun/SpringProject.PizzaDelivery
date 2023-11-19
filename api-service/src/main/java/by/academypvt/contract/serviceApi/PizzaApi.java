@@ -8,4 +8,5 @@ import java.util.List;
 public interface PizzaApi {
     List<PizzaResponse> allPizzas();
     PizzaResponse addPizza(PizzaRequest pizzaRequest);
+    void deletePizza(Long id);
 }

@@ -10,6 +10,7 @@ import by.academypvt.repository.spring.PizzaRepository;
 import by.academypvt.repository.spring.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class AdminServiceImpl implements AdminApi {
         Optional<UserResponse> userResponse = Optional.of(userMapper.toResponse(userRepository.findById(id).orElseThrow(() -> new UserIdException("Пользователя с данным Id нет в базе данных"))));
         return userResponse.get();
     }
-
+    @Transactional
     @Override
     public void deleteUser(Long id) { userRepository.deleteById(id); }
 }

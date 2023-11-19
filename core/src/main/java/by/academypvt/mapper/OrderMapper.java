@@ -21,6 +21,7 @@ public class OrderMapper {
         orderResponse.setId(order.getId());
         orderResponse.setUserId(userMapper.toResponse(order.getUserId()));
         orderResponse.setState(order.getState());
+        orderResponse.setOrderTime(order.getOrderTime());
         orderResponse.setDeliveryType(order.getDeliveryType());
         orderResponse.setCost(order.getCost());
         orderResponse.setComment(order.getComment());

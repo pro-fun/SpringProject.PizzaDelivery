@@ -23,4 +23,9 @@ public class SauceController implements SauceRestApi {
     public SauceResponse addSauce(SauceRequest sauceRequest) {
         return sauceService.addSauce(sauceRequest);
     }
+
+    @Override
+    public void deleteSauce(Long id) {
+        sauceService.deleteSauce(id);
+    }
 }

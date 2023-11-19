@@ -25,7 +25,7 @@ public class Sauce {
     private Long id;
     private String name;
     private BigDecimal cost;
-    @OneToMany(mappedBy = "sauce")
+    @OneToMany(mappedBy = "sauce", cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     protected List<SauceOrder> sauces = new ArrayList<>();

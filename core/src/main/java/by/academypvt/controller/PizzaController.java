@@ -23,4 +23,9 @@ public class PizzaController implements PizzaRestApi {
     public PizzaResponse addPizza(PizzaRequest pizzaRequest) {
         return pizzaService.addPizza(pizzaRequest);
     }
+
+    @Override
+    public void deletePizza(Long id) {
+        pizzaService.deletePizza(id);
+    }
 }

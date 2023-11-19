@@ -9,6 +9,7 @@ import by.academypvt.mapper.SauceMapper;
 import by.academypvt.repository.spring.SauceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class SauceServiceImpl implements SauceApi {
     public List<SauceResponse> allSauces() {
         return sauceRepository.findAll().stream().map(sauceMapper::toResponse).collect(Collectors.toList());
     }
-
+    @Transactional
     @Override
     public SauceResponse addSauce(SauceRequest sauceRequest) {
         if (sauceRepository.findByName(sauceRequest.getName()) != null) {
@@ -31,6 +32,11 @@ public class SauceServiceImpl implements SauceApi {
         }
         Sauce sauce = sauceMapper.toEntity(sauceRequest);
         return sauceMapper.toResponse(sauceRepository.save(sauce));
+    }
+
+    @Override
+    public void deleteSauce(Long id) {
+        sauceRepository.deleteById(id);
     }
 }
 

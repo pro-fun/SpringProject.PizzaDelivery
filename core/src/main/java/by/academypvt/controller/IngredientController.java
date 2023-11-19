@@ -23,4 +23,9 @@ public class IngredientController implements IngredientRestApi {
     public IngredientResponse addIngredient(IngredientRequest ingredientRequest) {
         return ingredientService.addIngredient(ingredientRequest);
     }
+
+    @Override
+    public void deleteIngredient(Long id) {
+        ingredientService.deleteIngredient(id);
+    }
 }

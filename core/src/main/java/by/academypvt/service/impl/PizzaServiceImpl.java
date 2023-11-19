@@ -10,6 +10,7 @@ import by.academypvt.repository.spring.PizzaRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,13 +26,20 @@ public class PizzaServiceImpl implements PizzaApi {
         return pizzaRepository.findAll().stream().map(pizzaMapper::toResponse).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public PizzaResponse addPizza(@NotNull PizzaRequest pizzaRequest) {
-        if(pizzaRepository.findByNameAndSize(pizzaRequest.getName(), pizzaRequest.getSize()) != null){
+        if (pizzaRepository.findByNameAndSize(pizzaRequest.getName(), pizzaRequest.getSize()) != null) {
             throw new FoodEntityException("Данная пицца уже есть в базе данных");
         }
         Pizza pizza = pizzaMapper.toEntity(pizzaRequest);
         return pizzaMapper.toResponse(pizzaRepository.save(pizza));
+    }
+
+    @Transactional
+    @Override
+    public void deletePizza(Long id) {
+        pizzaRepository.deleteById(id);
     }
 }
 

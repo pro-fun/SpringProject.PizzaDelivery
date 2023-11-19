@@ -27,13 +27,13 @@ public class Pizza {
     private String name;
     private Size size;
     private BigDecimal cost;
-    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     protected List<PizzaOrder> pizzas = new ArrayList<>();
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     protected List<IngredientPizza> ingredients = new ArrayList<>();
 
 
