@@ -25,9 +25,14 @@ public class Ingredient {
     private Long id;
     private String name;
     private BigDecimal cost;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "ingredient")
     protected List<IngredientPizza> ingredients = new ArrayList<>();
-
+    @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    protected List<PizzaOrder> pizzas = new ArrayList<>();
 
 
 

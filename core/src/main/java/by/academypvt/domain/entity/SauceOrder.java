@@ -1,10 +1,7 @@
 package by.academypvt.domain.entity;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.persistence.*;
 
@@ -30,12 +27,17 @@ public class SauceOrder {
 
     @EmbeddedId
     protected Id id = new Id();
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
     @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "sauce_id", insertable = false, updatable = false)
     private Sauce sauce;
+
     @Column(updatable = false)
     @NotNull
     private Long count;

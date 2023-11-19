@@ -39,14 +39,15 @@ public class OrderServiceImpl implements OrderApi {
     public OrderResponse addPizzaToOrder(PizzaOrderRequest pizzaOrderRequest) {
         Pizza pizza = pizzaRepository.findByNameAndSize(pizzaOrderRequest.getName(), pizzaOrderRequest.getSize());
         Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId==null){
+            throw new AccountException("Пройдите авторизацию");
+        }
         Optional<Order> order = orderRepository.findById(orderId);
         if (pizza==null){
             throw new FoodEntityException("Данной пиццы нет в базе данных");
         }
-        if (order.isEmpty()){
-            throw new AccountException("Пройдите авторизацию");
-        }
-        PizzaOrder pizzaOrder = new PizzaOrder(order.get(), pizza, pizzaOrderRequest.getCount());
+        Ingredient ingredient = ingredientRepository.findByName("Без добавок");
+        PizzaOrder pizzaOrder = new PizzaOrder(order.get(), pizza,ingredient, pizzaOrderRequest.getCount());
         pizzaOrder.setCost(pizza.getCost().multiply(BigDecimal.valueOf(pizzaOrderRequest.getCount())));
         BigDecimal currentCost = order.get().getCost().add(pizzaOrder.getCost());
         order.get().setCost(currentCost);
@@ -59,12 +60,12 @@ public class OrderServiceImpl implements OrderApi {
     public OrderResponse addSauceToOrder(SauceOrderRequest sauceOrderRequest) {
         Sauce sauce = sauceRepository.findByName(sauceOrderRequest.getName());
         Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId==null){
+            throw new AccountException("Пройдите авторизацию");
+        }
         Optional<Order> order = orderRepository.findById(orderId);
         if (sauce==null){
             throw new FoodEntityException("Данной пиццы нет в базе данных");
-        }
-        if (order.isEmpty()){
-            throw new AccountException("Пройдите авторизацию");
         }
         SauceOrder sauceOrder = new SauceOrder(order.get(), sauce, sauceOrderRequest.getCount());
         sauceOrder.setCost(sauce.getCost().multiply(BigDecimal.valueOf(sauceOrderRequest.getCount())));
@@ -78,14 +79,15 @@ public class OrderServiceImpl implements OrderApi {
     public OrderResponse addIngredientToPizza(IngredientPizzaRequest ingredientPizzaRequest) {
         Pizza pizza = pizzaRepository.findByNameAndSize(ingredientPizzaRequest.getName(), ingredientPizzaRequest.getSize());
         Long orderId = (Long) servletRequest.getSession().getAttribute("orderId");
+        if (orderId==null){
+            throw new AccountException("Пройдите авторизацию");
+        }
         Optional<Order> order = orderRepository.findById(orderId);
         Ingredient ingredient = ingredientRepository.findByName(ingredientPizzaRequest.getIngredient_name());
         if (pizza==null || ingredient==null){
             throw new FoodEntityException("Данных продуктов нет в базе данных");
         }
-        if (order.isEmpty()){
-            throw new AccountException("Пройдите авторизацию");
-        }
+
         IngredientPizza ingredientPizza = new IngredientPizza(ingredient,pizza,order.get(),ingredientPizzaRequest.getCount());
         ingredientPizza.setCost(ingredient.getCost().multiply(BigDecimal.valueOf(ingredientPizzaRequest.getCount())));
         BigDecimal currentCost = order.get().getCost().add(ingredientPizza.getCost());

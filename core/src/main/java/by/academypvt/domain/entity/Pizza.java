@@ -2,6 +2,7 @@ package by.academypvt.domain.entity;
 
 import by.academypvt.dto.enums.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -28,9 +29,11 @@ public class Pizza {
     private BigDecimal cost;
     @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     protected List<PizzaOrder> pizzas = new ArrayList<>();
-    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "pizza", fetch = FetchType.LAZY)
     protected List<IngredientPizza> ingredients = new ArrayList<>();
 
 

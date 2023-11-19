@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Component
 
 public class PizzaMapper {
-    IngredientPizzaMapper ingredientPizzaMapper = new IngredientPizzaMapper();
 
     public PizzaResponse toResponse(Pizza pizza) {
         PizzaResponse pizzaResponse = new PizzaResponse();
@@ -21,7 +20,6 @@ public class PizzaMapper {
         pizzaResponse.setName(pizza.getName());
         pizzaResponse.setSize(pizza.getSize());
         pizzaResponse.setCost(pizza.getCost());
-        pizzaResponse.setIngredients(pizza.getIngredients().stream().map(ingredientPizzaMapper::toResponse).collect(Collectors.toList()));
         return pizzaResponse;
     }
     public Pizza toEntity(PizzaRequest pizzaRequest) {

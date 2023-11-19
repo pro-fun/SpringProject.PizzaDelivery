@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class IngredientPizzaMapper {
     IngredientMapper ingredientMapper = new IngredientMapperImpl();
+    PizzaMapper pizzaMapper = new PizzaMapper();
     public IngredientPizzaResponse toResponse(IngredientPizza ingredientPizza) {
         IngredientPizzaResponse ingredientPizzaResponse = new IngredientPizzaResponse();
+        ingredientPizzaResponse.setPizza(pizzaMapper.toResponse(ingredientPizza.getPizza()));
         ingredientPizzaResponse.setIngredient(ingredientMapper.toResponse(ingredientPizza.getIngredient()));
         ingredientPizzaResponse.setCount(ingredientPizza.getCount());
         return ingredientPizzaResponse;

@@ -13,5 +13,4 @@ public class PizzaResponse {
     private String name;
     private Size size;
     private BigDecimal cost;
-    private List<IngredientPizzaResponse> ingredients = new ArrayList<>();
 }

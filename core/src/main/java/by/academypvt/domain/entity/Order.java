@@ -41,8 +41,8 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<SauceOrder> sauces = new ArrayList<>();
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     protected List<IngredientPizza> ingredients = new ArrayList<>();
-
 }

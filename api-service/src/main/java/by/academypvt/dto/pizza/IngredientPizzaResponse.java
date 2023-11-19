@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class IngredientPizzaResponse {
+    private PizzaResponse pizza;
     private IngredientResponse ingredient;
     private Long count;
 

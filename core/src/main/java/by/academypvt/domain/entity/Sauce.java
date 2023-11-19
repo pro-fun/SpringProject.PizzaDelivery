@@ -26,6 +26,8 @@ public class Sauce {
     private String name;
     private BigDecimal cost;
     @OneToMany(mappedBy = "sauce")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     protected List<SauceOrder> sauces = new ArrayList<>();
 
 }

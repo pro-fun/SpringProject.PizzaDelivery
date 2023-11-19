@@ -15,7 +15,7 @@ public class OrderMapper {
     UserMapper userMapper = new UserMapperImpl();
     PizzaOrderMapper pizzaOrderMapper = new PizzaOrderMapper();
     SauceOrderMapper sauceOrderMapper = new SauceOrderMapper();
-
+    IngredientPizzaMapper ingredientPizzaMapper = new IngredientPizzaMapper();
     public OrderResponse toResponse(Order order) {
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setId(order.getId());

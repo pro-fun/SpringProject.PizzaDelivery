@@ -1,10 +1,7 @@
 package by.academypvt.domain.entity;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.persistence.*;
 
@@ -32,15 +29,21 @@ public class IngredientPizza {
 
     @EmbeddedId
     protected Id id = new Id();
-    @ManyToOne
-    @JoinColumn(name = "ingredient_id", insertable = false, updatable = false)
-    private Ingredient ingredient;
-    @ManyToOne
-    @JoinColumn(name = "pizza_id", insertable = false, updatable = false)
-    private Pizza pizza;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id", insertable = false, updatable = false)
+    private Ingredient ingredient;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "pizza_id", insertable = false, updatable = false)
+    private Pizza pizza;
     @Column(updatable = false)
     @NotNull
     private Long count;
@@ -53,6 +56,7 @@ public class IngredientPizza {
         this.pizza = pizza;
         this.order = order;
         this.count = count;
+
 
         this.id.ingredientId = ingredient.getId();
         this.id.pizzaId = pizza.getId();
