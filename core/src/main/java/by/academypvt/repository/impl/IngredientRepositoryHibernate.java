@@ -1,51 +1,51 @@
 package by.academypvt.repository.impl;
 
 import by.academypvt.connection.HibernateJavaConfig;
-import by.academypvt.domain.entity.User;
-import by.academypvt.repository.UserRepository;
+import by.academypvt.domain.entity.Ingredient;
+import by.academypvt.repository.IngredientRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Query;
 import java.util.List;
 
-public class UserRepositoryHibernate implements UserRepository {
+public class IngredientRepositoryHibernate implements IngredientRepository {
     private final SessionFactory sessionFactory;
-    public UserRepositoryHibernate() {
+    public IngredientRepositoryHibernate() {
         this.sessionFactory = HibernateJavaConfig.getSessionFactory();
     }
 
     @Override
-    public User findUserById(Long id) {
+    public Ingredient findIngredientById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Ingredient ingredient = session.get(Ingredient.class, id);
         session.close();
-        return user;
+        return ingredient;
     }
 
     @Override
-    public void addUser(User user) {
+    public void addIngredient(Ingredient ingredient) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(user);
+        session.persist(ingredient);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteIngredientById(Long id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Ingredient ingredient = session.get(Ingredient.class, id);
         session.getTransaction().begin();
-        session.remove(user);
+        session.remove(ingredient);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<User> updateUsers() {
+    public List<Ingredient> updateIngredients() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select u from User u");
-        return (List<User>) query.getResultList();
+        Query query = session.createQuery("select i from Ingredient i");
+        return (List<Ingredient>) query.getResultList();
     }
 }
